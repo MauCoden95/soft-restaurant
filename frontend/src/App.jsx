@@ -9,6 +9,7 @@ import { Users } from './components/Users'
 import { Dishes } from './components/Dishes'
 import { Categories } from './components/Categories'
 import { EditDishes } from './components/EditDishes'
+import { EditCategories } from './components/EditCategories'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path='/usuarios' element={<Users/>}></Route>
           <Route path='/categorias' element={<Categories/>}></Route>
+          <Route path='/editar-categoria/:id' element={<EditCategories/>}></Route>
           <Route path='/insumos' element={<Dishes/>}></Route>
           <Route path='/editar-insumo/:id' element={<EditDishes/>}></Route>
       </Routes>

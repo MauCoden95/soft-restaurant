@@ -23,7 +23,7 @@ export const Dishes = () => {
 
 
     useEffect(() => {
-        
+
 
         const userDataString = localStorage.getItem('userData');
         const token = localStorage.getItem('token');
@@ -31,12 +31,12 @@ export const Dishes = () => {
         if (userDataString) {
             const parsedUserData = JSON.parse(userDataString);
             setUserData(parsedUserData);
-            
+
         }
 
-       if (token == null) {
-        navigate('/');
-       }
+        if (token == null) {
+            navigate('/');
+        }
 
         console.log(token);
 
@@ -108,7 +108,7 @@ export const Dishes = () => {
     }
 
 
-  
+
 
 
 
@@ -137,45 +137,55 @@ export const Dishes = () => {
 
 
 
-        axios.post('http://127.0.0.1:8000/api/dish', formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(response => {
-                Swal.fire({
-                    title: "Nuevo producto creado",
-                    icon: "success"
-                });
-                setFormData({
-                    category_id: 0,
-                    name: '',
-                    description: '',
-                    price: '0'
-                })
-                axios.get('http://127.0.0.1:8000/api/dishes', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                })
-                    .then(response => {
-                        setDishes(response.data.dishes); 
-                        console.log(response.data);
-                    })
-                    .catch(error => {
-                        console.error('Error al hacer la solicitud:', error);
-                    });
-            })
-            .catch(error => {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Error, no se pudo guardar el producto',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar',
-                });
+        if (formData.category_id === '' || formData.name === '' || formData.description === '' || formData.price === '') {
+            Swal.fire({
+                title: 'Error',
+                text: 'Error, campos vacíos',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
             });
+        } else {
+            axios.post('http://127.0.0.1:8000/api/dish', formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    Swal.fire({
+                        title: "Nuevo producto creado",
+                        icon: "success"
+                    });
+                    setFormData({
+                        category_id: 0,
+                        name: '',
+                        description: '',
+                        price: '0'
+                    })
+                    axios.get('http://127.0.0.1:8000/api/dishes', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(response => {
+                            setDishes(response.data.dishes);
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.error('Error al hacer la solicitud:', error);
+                        });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Error, no se pudo guardar el producto',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar',
+                    });
+                });
+        }
+
 
     }
 

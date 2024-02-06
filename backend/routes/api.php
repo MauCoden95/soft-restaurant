@@ -22,7 +22,11 @@ Route::controller(DishController::class)->group(function () {
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', 'index');
+    Route::get('/category/{id}', 'categoryById');
+    Route::post('/category', 'store');
+    Route::delete('/category/{id}', 'destroy');
     Route::get('/categorybyname/{name}', 'getIdbyName');
+    Route::put('/category/{id}', 'update');
 });
 
 

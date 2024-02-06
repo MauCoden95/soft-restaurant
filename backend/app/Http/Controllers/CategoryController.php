@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('jwt.auth');
-    // }
+    public function __construct()
+    {
+         $this->middleware('jwt.auth');
+    }
 
 
     public function getIdbyName($name){
@@ -46,7 +46,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category([
+            'name' => $request->name,
+        ]);
+
+        $category->save();
+
+        return response()->json("Categoría guardada");
     }
 
     /**
@@ -68,16 +74,35 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->update([
+            'name' => $request->name
+        ]);    
+        
+
+        return response()->json("Categoría editada");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->delete();
+
+        return response()->json("Categoría eliminada");
+    }
+
+    public function categoryById($id){
+        $category = Category::find($id);
+
+        return response()->json([
+            'category' => $category
+        ]);
     }
 }

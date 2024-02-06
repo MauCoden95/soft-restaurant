@@ -82,7 +82,7 @@ export const Login = () => {
 
       <div class="w-4/6 min-h-0 rounded-lg flex items-center justify-center">
         <Link to="http://localhost:5173/">
-          <img className='w-[40rem]' src="http://localhost:5173/img/Logo.png" alt="Logo" />
+          <img className='w-[45rem]' src="http://localhost:5173/img/Logo.png" alt="Logo" />
         </Link>
 
 
