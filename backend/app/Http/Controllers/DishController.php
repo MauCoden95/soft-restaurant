@@ -71,9 +71,19 @@ class DishController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, $id)
     {
-        //
+        $dish = Dish::find($id);
+
+        $dish->update([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price
+        ]);    
+        
+
+        return response()->json("Insumo editado");
     }
 
     /**
@@ -86,5 +96,13 @@ class DishController extends Controller
         $dish->delete();
 
         return response()->json("Producto eliminado");
+    }
+
+    public function dishById($id){
+        $dish = Dish::find($id);
+
+        return response()->json([
+            'dish' => $dish
+        ]);
     }
 }

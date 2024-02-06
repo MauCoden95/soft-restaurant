@@ -14,6 +14,8 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(DishController::class)->group(function () {
     Route::get('/dishes', 'index');
+    Route::get('/dish/{id}', 'dishById');
+    Route::put('/dish/{id}', 'update');
     Route::post('/dish', 'store');
     Route::delete('/dish/{id}', 'destroy');
 });

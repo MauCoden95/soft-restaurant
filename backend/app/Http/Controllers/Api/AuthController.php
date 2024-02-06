@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -20,12 +21,8 @@ class AuthController extends Controller
     }
 
 
-    public function register(Request $request){
-        $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|email',
-            'password' => 'required|min:8|max:16'
-        ]);
+    public function register(LoginRequest $request){
+        
 
         $user = User::create([
             'name' => $request->name,

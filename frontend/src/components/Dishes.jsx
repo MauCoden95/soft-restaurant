@@ -9,6 +9,7 @@ import { faTrash, faEdit, faPlusCircle, faTimes, faSave } from '@fortawesome/fre
 import Swal from 'sweetalert2';
 import '../../public/styles/Styles.css';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export const Dishes = () => {
@@ -22,7 +23,7 @@ export const Dishes = () => {
 
 
     useEffect(() => {
-        getCategoryIdByName("Empanadas");
+        
 
         const userDataString = localStorage.getItem('userData');
         const token = localStorage.getItem('token');
@@ -107,25 +108,7 @@ export const Dishes = () => {
     }
 
 
-    const getCategoryIdByName = async (name) => {
-        try {
-            const token = localStorage.getItem('token');
-
-            const response = await axios.get(`http://127.0.0.1:8000/api/categorybyname/${name}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            const id = response.data.category.id;
-            return id;
-        } catch (error) {
-            console.error('Error al hacer la solicitud:', error);
-
-            return null;
-        }
-    };
+  
 
 
 
@@ -208,6 +191,7 @@ export const Dishes = () => {
                     <form onSubmit={handleSubmit} className='w-11/12 m-auto' action="" autoComplete='off'>
                         <select className='w-full m-auto border-2 border-stone-400 p-2' name="category_id" value={formData.category_id} onChange={handleChange}>
                             <option>--Categoría--</option>
+                            <hr />
                             {categories.map((element) => (
                                 <option value={element.id}>{element.name}</option>
                             ))}
@@ -265,7 +249,6 @@ export const Dishes = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     {dishes.map((element) => (
                                         <tr className="border-b dark:border-neutral-500">
                                             <td
@@ -289,7 +272,7 @@ export const Dishes = () => {
                                                 {element.price}
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4">
-                                                <FontAwesomeIcon className='cursor-pointer duration-500 mr-5 text-2xl text-blue-500 hover:text-blue-950' icon={faEdit} />
+                                                <Link to={`/editar-insumo/${element.id}`}><FontAwesomeIcon className='cursor-pointer duration-500 mr-5 text-2xl text-blue-500 hover:text-blue-950' icon={faEdit} /></Link>
                                                 <FontAwesomeIcon onClick={() => handleDelete(element.id)} className='cursor-pointer duration-500 text-2xl text-red-500 hover:text-red-950' icon={faTrash} />
                                             </td>
                                         </tr>
