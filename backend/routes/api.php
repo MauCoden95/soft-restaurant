@@ -16,6 +16,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(TableController::class)->group(function () {
     Route::get('/tables', 'index');
     Route::post('/table', 'store');
+    Route::put('/change/{id}', 'changeAvailability');
 });
 
 Route::controller(DishController::class)->group(function () {

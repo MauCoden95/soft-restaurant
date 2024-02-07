@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Header } from './parts/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTable, faPenFancy, faShoppingBag, faTrash,faBoxes,faCheck,faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faTable, faPenFancy, faShoppingBag, faTrash,faBoxes,faCheck,faExclamationTriangle,faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons';
 import { Title } from './parts/Title';
 import Swal from 'sweetalert2';
 import '../../public/styles/Styles.css';
@@ -18,7 +18,6 @@ export const Orders = () => {
     const [userData, setUserData] = useState({});
     const [dishes, setDishes] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
-    const [price, setPrice] = useState(0);
     const [selectedProducts, setSelectedProducts] = useState([]);
 
     useEffect(() => {
@@ -108,17 +107,38 @@ export const Orders = () => {
             product.id === id ? { ...product, checked: !product.checked } : product
         ));
     };
+
+    const handleChangeAvailability = (id) => {
+        const token = localStorage.getItem('token');
+
+        axios.put(`http://127.0.0.1:8000/api/change/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            Swal.fire({
+                title: "Estado de la mesa actualizado!",
+                icon: "success"
+            });
+        })
+        .catch(error => {
+           
+        });
+    }
     
 
     return (
         <div>
             <Header />
             <Title title={`Tomar orden para la mesa Nro° ${id}`} icon={faPenFancy} quantity="" />
-            <form className='relative w-11/12 h-96 m-auto mt-12' action="">
+            <form className='relative w-11/12 h-96 m-auto mt-12 mb-28' action="">
                 <div className='w-full flex items-center justify-between'>
                     <div>
-                        <button className='bg-green-700 hover:bg-green-400 rounded-md duration-300 px-5 py-2'>Ordenar <FontAwesomeIcon icon={faShoppingBag} className='ml-2' /></button>
+                        <button className='bg-green-700 hover:bg-green-400 rounded-md duration-300 px-5 py-2'>Cobrar <FontAwesomeIcon icon={faMoneyBill1Wave} className='ml-2' /></button>
                         <button className='ml-5 bg-orange-700 hover:bg-orange-400 rounded-md duration-300 px-5 py-2' onClick={handleDelivery} type='button'>Entregar <FontAwesomeIcon icon={faBoxes} className='ml-2' /></button>
+                        <button className='ml-5 bg-indigo-400 hover:bg-indigo-200 rounded-md duration-300 px-5 py-2' onClick={ ()=>handleChangeAvailability(id)} type='button'>Ocupar/Desocupar Mesa <FontAwesomeIcon icon={faTable} className='ml-2' /></button>
                     </div>
                     <span className='text-4xl text-green-900'>{totalPrice} $</span>
                 </div>
@@ -135,7 +155,7 @@ export const Orders = () => {
                         )
                     }
                 </ul>
-                <ul className='w-full min-h-0'>
+                    <h2 className='text-center my-5'>Estado del pedido: <span ><FontAwesomeIcon className='text-2xl text-red-500' icon={faExclamationTriangle} /> Pendiente</span> | <span ><FontAwesomeIcon className='text-2xl text-green-500' icon={faCheck} /> Entregado</span></h2>
                     <table
                         class="min-w-full border text-center text-sm font-light mt-5">
                         <thead class="border-b font-medium">
@@ -214,7 +234,7 @@ export const Orders = () => {
                             ))}
                         </tbody>
                     </table>
-                </ul>
+              
             </form>
 
         </div>

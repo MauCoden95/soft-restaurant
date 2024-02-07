@@ -44,6 +44,13 @@ class TableController extends Controller
         return response()->json("Mesa guardada");
     }
 
+    public function changeAvailability($id){
+        $table = Table::find($id);
+
+        $table->toggleState();
+        return response()->json(['message' => 'Estado cambiado correctamente']);
+    }
+
     /**
      * Display the specified resource.
      */

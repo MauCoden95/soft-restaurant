@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends Model
 {
     use HasFactory;
-    protected $fillable = ['nro'];
+    protected $fillable = ['nro','state'];
+
+    public function toggleState()
+    {
+        $this->state = !$this->state;
+        $this->save();
+    }
 }
