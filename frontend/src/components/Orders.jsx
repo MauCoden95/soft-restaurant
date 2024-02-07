@@ -72,13 +72,29 @@ export const Orders = () => {
     };
 
 
-    const handleDecrement = () => {
+    const handleDecrement = (id) => {
+        setSelectedProducts(selectedProducts.map(product =>
+            product.id === id && product.quantity > 0
+                ? { ...product, quantity: product.quantity - 1, subtotal: product.price * (product.quantity - 1) }
+                : product
+        ));
+    };
 
-    }
-   
-    const handleIncrement = () => {
-        
-    }
+    const handleIncrement = (id) => {
+        setSelectedProducts(selectedProducts.map(product =>
+            product.id === id
+                ? { ...product, quantity: product.quantity + 1, subtotal: product.price * (product.quantity + 1) }
+                : product
+        ));
+    };
+
+    const handleDelete = (id) => {
+        setSelectedProducts(selectedProducts.filter(product => product.id !== id));
+    };
+
+    const totalPrice = selectedProducts.reduce((total, product) => {
+        return total + product.subtotal;
+    }, 0);
 
     return (
         <div>
@@ -87,7 +103,7 @@ export const Orders = () => {
             <form className='relative w-11/12 h-96 m-auto mt-12' action="">
                 <div className='w-full flex items-center justify-between'>
                     <button className='bg-green-700 hover:bg-green-400 rounded-md duration-300 px-5 py-2'>Ordenar <FontAwesomeIcon icon={faShoppingBag} className='ml-2' /></button>
-                    <span className='text-4xl text-green-900'>{price} $</span>
+                    <span className='text-4xl text-green-900'>{totalPrice} $</span>
                 </div>
                 <input className='w-full px-4 py-2 text-xl my-3 rounded-md border-2 border-amber-950 focus:border-amber-700 focus:bg-gray-200 duration-300' placeholder='Ingrese el insumo...' type="text" name="dish" value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)} />
@@ -138,24 +154,24 @@ export const Orders = () => {
                             {selectedProducts.map(product => (
                                 <tr key={product.id} class="border-b ">
                                     <td
-                                        class="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        class="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                         {product.name}
                                     </td>
                                     <td
-                                        class="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
-                                        <button onClick={handleDecrement} className='bg-blue-500 hover:bg-blue-800 text-white text-xl mr-7 px-3 rounded'>-</button>{product.quantity}<button onClick={handleIncrement} className='bg-blue-500 hover:bg-blue-800 text-white text-xl ml-7 px-3 rounded'>+</button>
+                                        class="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        <button onClick={() => handleDecrement(product.id)} type='button' className='bg-blue-500 hover:bg-blue-800 text-white text-xl mr-7 px-3 rounded'>-</button>{product.quantity}<button onClick={() => handleIncrement(product.id)} type='button' className='bg-blue-500 hover:bg-blue-800 text-white text-xl ml-7 px-3 rounded'>+</button>
                                     </td>
                                     <td
-                                        class="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        class="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                         {product.price} $
                                     </td>
                                     <td
-                                        class="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                        class="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                         {product.subtotal} $
                                     </td>
                                     <td
-                                        class="text-xl whitespace-nowrap border-l border-r px-6 py-4 dark:border-neutral-500">
-                                        <button>
+                                        class="text-base whitespace-nowrap border-l border-r px-6 py-4 dark:border-neutral-500">
+                                        <button onClick={() => handleDelete(product.id)}>
                                             <FontAwesomeIcon  className='cursor-pointer duration-500 text-2xl text-red-500 hover:text-red-950' icon={faTrash} />
                                         </button>
                                     </td>
