@@ -80,7 +80,7 @@ export const Header = () => {
                             <li><Link to="/categorias" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faSuitcase} /> Categorías</Link></li>
                             <li><Link to="/mesas" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faTable} /> Mesas</Link></li>
                             <li><Link to="/usuarios" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUsers} /> Usuarios</Link></li>
-                            <li><Link to="/configurar" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faGear} /> Configurar</Link></li>
+                            
                         </ul>
                     </nav>
 
