@@ -130,11 +130,7 @@ export const Dishes = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem('token');
-
-
-
-        console.log(formData);
+        const token = localStorage.getItem('token');     
 
 
 
