@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import '../../public/styles/Styles.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { BtnAdd } from './parts/BtnAdd';
 
 
 export const Dishes = () => {
@@ -216,9 +217,7 @@ export const Dishes = () => {
             <Header />
             <Title title="Insumos" icon={faUtensils} quantity={dishes.length} />
             <div className="w-11/12 m-auto my-12 flex flex-col">
-                <button onClick={toggleAdd} className='w-32 float-right mb-8 px-6 py-1.5 rounded-md duration-300 bg-green-900 hover:bg-green-700 text-white'>
-                    <FontAwesomeIcon icon={faPlusCircle} /> Añadir
-                </button>
+                <BtnAdd onClick={toggleAdd} />
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
@@ -262,7 +261,7 @@ export const Dishes = () => {
                                     {dishes.map((element) => (
                                         <tr className="border-b dark:border-neutral-500">
                                             <td
-                                                className="text-xl whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                className="text-xl bg-amber-400 whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                                 {element.id}
                                             </td>
                                             <td

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import '../../public/styles/Styles.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { BtnAdd } from './parts/BtnAdd';
 
 
 
@@ -56,9 +57,7 @@ export const Categories = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const valorCategoryId = name === 'category_id' ? parseInt(value, 10) : value;
-
-        setFormData({ ...formData, [name]: valorCategoryId });
+        setFormData({ ...formData, [name]: value });
     };
 
     const toggleAdd = () => {
@@ -76,42 +75,42 @@ export const Categories = () => {
                 icon: 'error',
                 confirmButtonText: 'Aceptar',
             });
-        }else{
+        } else {
             axios.post('http://127.0.0.1:8000/api/category', formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(response => {
-                Swal.fire({
-                    title: "Nueva categoría creada",
-                    icon: "success"
-                });
-                setFormData({
-                    name: ''
-                })
-                axios.get('http://127.0.0.1:8000/api/categories', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                })
-                    .then(response => {
-                        setCategories(response.data.categories); 
-                    })
-                    .catch(error => {
-                        console.error('Error al hacer la solicitud:', error);
-                    });
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
             })
-            .catch(error => {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Error, no se pudo guardar la categoría',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar',
+                .then(response => {
+                    Swal.fire({
+                        title: "Nueva categoría creada",
+                        icon: "success"
+                    });
+                    setFormData({
+                        name: ''
+                    })
+                    axios.get('http://127.0.0.1:8000/api/categories', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(response => {
+                            setCategories(response.data.categories);
+                        })
+                        .catch(error => {
+                            console.error('Error al hacer la solicitud:', error);
+                        });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Error, no se pudo guardar la categoría',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar',
+                    });
                 });
-            });
         }
     }
 
@@ -166,9 +165,7 @@ export const Categories = () => {
             <Header />
             <Title title="Categorías" icon={faSuitcase} quantity={categories.length} />
             <div class="w-11/12 m-auto my-12 flex flex-col">
-                <button onClick={toggleAdd} className='w-32 float-right mb-8 px-6 py-1.5 rounded-md duration-300 bg-green-900 hover:bg-green-700 text-white'>
-                    <FontAwesomeIcon icon={faPlusCircle} /> Añadir
-                </button>
+                <BtnAdd onClick={toggleAdd} />
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div class="overflow-hidden">
@@ -198,7 +195,7 @@ export const Categories = () => {
                                     {categories.map((element) => (
                                         <tr class="border-b dark:border-neutral-500">
                                             <td
-                                                class="text-xl whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                class="text-xl bg-amber-400 whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                                 {element.id}
                                             </td>
                                             <td
@@ -222,6 +219,7 @@ export const Categories = () => {
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }

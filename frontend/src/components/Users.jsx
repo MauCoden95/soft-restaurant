@@ -82,7 +82,7 @@ export const Users = () => {
                                     {users.map((element) => (
                                         <tr class="border-b dark:border-neutral-500">
                                             <td
-                                                class="text-xl whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                class="text-xl bg-amber-400 whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                                 {element.id}
                                             </td>
                                             <td

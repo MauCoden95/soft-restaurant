@@ -92,7 +92,7 @@ export const EditDishes = () => {
                 confirmButtonText: 'Aceptar',
             });
         } else {
-            axios.put(`http://127.0.0.1:8000/api/category/${id}`, formData, {
+            axios.put(`http://127.0.0.1:8000/api/dish/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -147,7 +147,6 @@ export const EditDishes = () => {
 
                 <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><FontAwesomeIcon className='cursor-pointer duration-500 mr-3 text-2xl text-white' icon={faEdit} /> Editar</button>
             </form>
-
 
         </div>
     )

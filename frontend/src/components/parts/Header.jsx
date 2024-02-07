@@ -12,6 +12,7 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 
 export const Header = () => {
     const [userData, setUserData] = useState({});
@@ -72,13 +73,14 @@ export const Header = () => {
                         <img className='w-20' src="http://localhost:5173/img/Logo.png" alt="Logo" />
                     </Link>
 
-                    <nav className='w-2/4 h-full'>
+                    <nav className='w-3/5 h-full'>
                         <ul className='w-full h-full flex items-center justify-between'>
                             <li><Link to="/dashboard" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faHome} /> Inicio</Link></li>
                             <li><Link to="/insumos" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUtensils} /> Insumos</Link></li>
                             <li><Link to="/categorias" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faSuitcase} /> Categorías</Link></li>
-                            <li><Link className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faTable} /> Mesas</Link></li>
+                            <li><Link to="/mesas" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faTable} /> Mesas</Link></li>
                             <li><Link to="/usuarios" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUsers} /> Usuarios</Link></li>
+                            <li><Link to="/configurar" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faGear} /> Configurar</Link></li>
                         </ul>
                     </nav>
 
@@ -87,6 +89,7 @@ export const Header = () => {
                             <FontAwesomeIcon icon={faUser} /> {userData.name} <FontAwesomeIcon className='ml-5' icon={faChevronDown} />
                         </button>
                         <div className={`${menu ? 'block' : 'hidden'} absolute top-full right-0 w-full h-auto`}>
+                        <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faGear} /> Configuración</button>
                             <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión</button>
                         </div>
                     </div>
