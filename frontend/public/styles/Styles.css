@@ -1,3 +1,7 @@
 .form{
     background-color: rgb(0, 0, 0, .9);
 }
+
+.shadow{
+    box-shadow: 0px 0px 20px rgba(105,105,105);
+}

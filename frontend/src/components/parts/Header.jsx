@@ -26,7 +26,6 @@ export const Header = () => {
         if (userDataString) {
             const parsedUserData = JSON.parse(userDataString);
             setUserData(parsedUserData);
-            console.log("DATOS: ", userData);
         }
 
 

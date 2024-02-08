@@ -21,9 +21,18 @@ class CategoryController extends Controller
             'category' => $category
         ]);
     }
-    /**
-     * Display a listing of the resource.
-     */
+
+
+    public function categoriesQuantity(){
+        $categories = Category::all();
+        $categoriesCount = count($categories);
+
+        return response()->json([
+            'categoriesCount' => $categoriesCount
+        ]);
+    }
+
+
     public function index()
     {
         $categories = Category::all();

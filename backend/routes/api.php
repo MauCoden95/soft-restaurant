@@ -12,6 +12,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/register', 'register');
     Route::get('/users', 'list');
+    Route::get('/users-count', 'usersCount');
 });
 
 Route::controller(TableController::class)->group(function () {
@@ -22,6 +23,7 @@ Route::controller(TableController::class)->group(function () {
 
 Route::controller(DishController::class)->group(function () {
     Route::get('/dishes', 'index');
+    Route::get('/dishes-count', 'dishesQuantity');
     Route::get('/dish/{id}', 'dishById');
     Route::put('/dish/{id}', 'update');
     Route::post('/dish', 'store');
@@ -30,6 +32,7 @@ Route::controller(DishController::class)->group(function () {
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', 'index');
+    Route::get('/categories-count', 'categoriesQuantity');
     Route::get('/category/{id}', 'categoryById');
     Route::post('/category', 'store');
     Route::delete('/category/{id}', 'destroy');
@@ -39,6 +42,7 @@ Route::controller(CategoryController::class)->group(function () {
 
 Route::controller(SaleController::class)->group(function () {
     Route::post('/sale', 'store');
+    Route::get('/sales-today', 'todaySales');
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

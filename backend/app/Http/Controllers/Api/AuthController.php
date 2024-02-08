@@ -15,7 +15,7 @@ class AuthController extends Controller
         $this->middleware('auth:api', 
         ['except' => [
                 'login',
-                'register'
+                'register',
              ]
         ]);
     }
@@ -73,6 +73,15 @@ class AuthController extends Controller
 
         return response()->json([
             'users' => $users
+        ]);
+    }
+
+    public function usersCount(){
+        $users = User::all();
+        $usersCount = count($users);
+
+        return response()->json([
+            'usersCount' => $usersCount
         ]);
     }
 }

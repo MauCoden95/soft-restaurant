@@ -6,34 +6,24 @@ use App\Models\Sale;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaleRequest;
-//use Tymon\JWTAuth\Facades\JWTAuth;
+use Carbon\Carbon;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class SaleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('jwt.auth');
-    // }
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('jwt.auth');
+    }
+    
+    
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(SaleRequest $request)
     {
          $sale = new Sale([
@@ -47,9 +37,18 @@ class SaleController extends Controller
          return response()->json("Venta guardada!!!");
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function todaySales()
+    {
+        $currentDate = Carbon::now()->setTimezone('America/Argentina/Buenos_Aires')->toDateString();
+        $salesToday = Sale::whereDate('date', $currentDate)->get();
+        
+
+        return response()->json([
+            'salesToday' => $salesToday
+        ]);
+    }
+
+    
     public function show(Sale $sale)
     {
         //

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Header } from './parts/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { Title } from './parts/Title';
 import { faTrash, faEdit, faPlusCircle, faTimes, faSave } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
@@ -163,7 +163,7 @@ export const Categories = () => {
                 </div>
             </div>
             <Header />
-            <Title title="Categorías" icon={faSuitcase} quantity={categories.length} />
+            <Title title="Categorías" icon={faCopy} quantity={categories.length} />
             <div class="w-11/12 m-auto my-12 flex flex-col">
                 <BtnAdd onClick={toggleAdd} />
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">

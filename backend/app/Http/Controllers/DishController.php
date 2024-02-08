@@ -30,6 +30,15 @@ class DishController extends Controller
         ]);
     }
 
+    public function dishesQuantity(){
+        $dishes = Dish::all();
+        $dishesCount = count($dishes);
+
+        return response()->json([
+            'dishesCount' => $dishesCount
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
