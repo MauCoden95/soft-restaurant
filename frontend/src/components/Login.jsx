@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import '../../public/styles/Styles.css';
 
 export const Login = () => {
 
@@ -74,7 +75,7 @@ export const Login = () => {
 };
 
   return (
-    <div className="w-screen h-screen bg-yellow-950 flex items-center justify-center">
+    <div className="login w-screen h-screen flex items-center justify-center">
 
 
 

@@ -43,6 +43,8 @@ Route::controller(CategoryController::class)->group(function () {
 Route::controller(SaleController::class)->group(function () {
     Route::post('/sale', 'store');
     Route::get('/sales-today', 'todaySales');
+    Route::get('/sales-week', 'getSalesLastWeek');
+    Route::get('/sales-four-weeks', 'getSalesLastFourWeeks');
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

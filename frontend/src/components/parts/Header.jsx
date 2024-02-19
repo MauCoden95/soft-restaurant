@@ -19,6 +19,14 @@ export const Header = () => {
     const [menu, setMenu] = useState(false);
     const navigate = useNavigate();
 
+    const isAdmin = (role_id) => {
+        if (role_id == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     useEffect(() => {
         const userDataString = localStorage.getItem('userData');
         const token = localStorage.getItem('token');
@@ -26,10 +34,17 @@ export const Header = () => {
         if (userDataString) {
             const parsedUserData = JSON.parse(userDataString);
             setUserData(parsedUserData);
+
         }
 
 
     }, []);
+
+    useEffect(() => {
+        console.log("DATOS USUARIO: ", typeof userData.role_id);
+    }, [userData]);
+
+
 
     const showMenu = () => {
         setMenu(!menu);
@@ -72,15 +87,26 @@ export const Header = () => {
                         <img className='w-20' src="http://localhost:5173/img/Logo.png" alt="Logo" />
                     </Link>
 
+
                     <nav className='w-3/5 h-full'>
-                        <ul className='w-full h-full flex items-center justify-between'>
-                            <li><Link to="/dashboard" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faHome} /> Inicio</Link></li>
-                            <li><Link to="/insumos" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUtensils} /> Insumos</Link></li>
-                            <li><Link to="/categorias" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faSuitcase} /> Categorías</Link></li>
-                            <li><Link to="/mesas" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faTable} /> Mesas</Link></li>
-                            <li><Link to="/usuarios" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUsers} /> Usuarios</Link></li>
-                            
-                        </ul>
+                        {
+                            isAdmin(userData.role_id) ? (
+                                <ul className='w-full h-full flex items-center justify-between'>
+                                    <li><Link to="/dashboard" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faHome} /> Inicio</Link></li>
+                                    <li><Link to="/insumos" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUtensils} /> Insumos</Link></li>
+                                    <li><Link to="/categorias" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faSuitcase} /> Categorías</Link></li>
+                                    <li><Link to="/mesas" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faTable} /> Mesas</Link></li>
+                                    <li><Link to="/usuarios" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faUsers} /> Usuarios</Link></li>
+
+                                </ul>
+                            ) : (
+                                <ul className='w-full h-full flex items-center justify-start'>
+                                    <li><Link to="/dashboard" className='text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faHome} /> Inicio</Link></li>
+                                    <li><Link to="/mesas" className='ml-12 text-amber-200 hover:text-amber-500' href=""><FontAwesomeIcon icon={faTable} /> Mesas</Link></li>
+                                </ul>
+                            )
+                        }
+
                     </nav>
 
                     <div className='relative w-auto h-auto'>
@@ -88,7 +114,7 @@ export const Header = () => {
                             <FontAwesomeIcon icon={faUser} /> {userData.name} <FontAwesomeIcon className='ml-5' icon={faChevronDown} />
                         </button>
                         <div className={`${menu ? 'block' : 'hidden'} absolute top-full right-0 w-full h-auto`}>
-                        <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faGear} /> Configuración</button>
+                            <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faGear} /> Configuración</button>
                             <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión</button>
                         </div>
                     </div>

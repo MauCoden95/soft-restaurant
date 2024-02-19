@@ -5,3 +5,7 @@
 .shadow{
     box-shadow: 0px 0px 20px rgba(105,105,105);
 }
+
+.login{
+    background-image: url('../img/wood.jpeg');
+}

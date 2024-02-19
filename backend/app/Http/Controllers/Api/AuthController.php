@@ -21,11 +21,12 @@ class AuthController extends Controller
     }
 
 
-    public function register(LoginRequest $request){
+    public function register(Request $request){
         
 
         $user = User::create([
             'name' => $request->name,
+            'role_id' => $request->role_id,
             'email' => $request->email,
             'password' => bcrypt($request->password)
         ]);
