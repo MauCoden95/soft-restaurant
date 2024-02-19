@@ -71,7 +71,6 @@ class AuthController extends Controller
 
     public function list(){
         $users = User::with('role')->get();
-        //$users = User::all();
 
         return response()->json([
             'users' => $users
@@ -85,5 +84,28 @@ class AuthController extends Controller
         return response()->json([
             'usersCount' => $usersCount
         ]);
+    }
+
+    public function dataUser($id){
+        $id = User::where('id', $id)->value('id');
+
+        return response()->json([
+            'id' => $id
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $user->update([
+            'role_id' => $request->role_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);    
+        
+
+        return response()->json("Usuario editado");
     }
 }

@@ -12,6 +12,7 @@ import { EditDishes } from './components/EditDishes'
 import { EditCategories } from './components/EditCategories'
 import { Tables } from './components/Tables'
 import { Orders } from './components/Orders'
+import { EditUsers } from './components/EditUsers'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +23,7 @@ function App() {
           <Route path='/' element={<Login/>}></Route>
           <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path='/usuarios' element={<Users/>}></Route>
+          <Route path='/editar-usuario/:id' element={<EditUsers/>}></Route>
           <Route path='/categorias' element={<Categories/>}></Route>
           <Route path='/editar-categoria/:id' element={<EditCategories/>}></Route>
           <Route path='/insumos' element={<Dishes/>}></Route>

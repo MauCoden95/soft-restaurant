@@ -14,6 +14,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
     Route::get('/users', 'list');
     Route::get('/users-count', 'usersCount');
+    Route::get('/user/{id}', 'dataUser');
+    Route::put('/user/{id}', 'update');
 });
 
 Route::controller(TableController::class)->group(function () {

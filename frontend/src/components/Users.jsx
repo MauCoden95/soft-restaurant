@@ -8,10 +8,13 @@ import { Title } from './parts/Title';
 import { faTrash, faEdit, faTimes, faSave } from '@fortawesome/free-solid-svg-icons';
 import { BtnAdd } from './parts/BtnAdd';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Users = () => {
 
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({});
     const [users, setUsers] = useState([]);
     const [showAdd, setShowAdd] = useState(false);
@@ -195,7 +198,7 @@ export const Users = () => {
                                         <th
                                             scope="col"
                                             class="text-xl border-r px-6 py-4 dark:border-neutral-500">
-                                            mail
+                                            Correo electrónico
                                         </th>
                                         <th
                                             scope="col"
@@ -225,7 +228,7 @@ export const Users = () => {
                                                 {element.email}
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4">
-                                                <FontAwesomeIcon className='cursor-pointer duration-500 mr-5 text-2xl text-blue-500 hover:text-blue-950' icon={faEdit} />
+                                                <Link to={`/editar-usuario/${element.id}`}><FontAwesomeIcon className='cursor-pointer duration-500 mr-5 text-2xl text-blue-500 hover:text-blue-950' icon={faEdit} /></Link>
                                                 <FontAwesomeIcon className='cursor-pointer duration-500 text-2xl text-red-500 hover:text-red-950' icon={faTrash} />
                                             </td>
                                         </tr>
