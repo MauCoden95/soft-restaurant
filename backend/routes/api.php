@@ -5,6 +5,7 @@ use App\Http\Controllers\DishController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,10 @@ Route::controller(SaleController::class)->group(function () {
     Route::get('/sales-today', 'todaySales');
     Route::get('/sales-week', 'getSalesLastWeek');
     Route::get('/sales-four-weeks', 'getSalesLastFourWeeks');
+});
+
+Route::controller(RoleController::class)->group(function () {
+    Route::get('/roles', 'index');
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

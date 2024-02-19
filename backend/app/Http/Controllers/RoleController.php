@@ -8,12 +8,18 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    
+      {   $this->middleware('jwt.auth');
+    }
+
     public function index()
     {
-        //
+        $roles = Role::all();
+        
+        return response()->json([
+            'roles' => $roles
+        ]);
     }
 
     /**

@@ -15,7 +15,7 @@ class AuthController extends Controller
         $this->middleware('auth:api', 
         ['except' => [
                 'login',
-                'register',
+                'register'
              ]
         ]);
     }
@@ -70,7 +70,8 @@ class AuthController extends Controller
     }
 
     public function list(){
-        $users = User::all();
+        $users = User::with('role')->get();
+        //$users = User::all();
 
         return response()->json([
             'users' => $users
