@@ -16,6 +16,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/users-count', 'usersCount');
     Route::get('/user/{id}', 'dataUser');
     Route::put('/user/{id}', 'update');
+    Route::delete('/user/{id}', 'destroy');
 });
 
 Route::controller(TableController::class)->group(function () {

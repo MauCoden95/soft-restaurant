@@ -108,4 +108,12 @@ class AuthController extends Controller
 
         return response()->json("Usuario editado");
     }
+
+    public function destroy($id){
+        $user = User::find($id);
+
+        $user->delete();
+
+        return response()->json("Usuario eliminado");
+    }
 }

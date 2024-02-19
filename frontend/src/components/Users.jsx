@@ -146,6 +146,44 @@ export const Users = () => {
         }
     }
 
+
+    const handleDelete = (id) => {
+        const token = localStorage.getItem('token');
+
+        
+                Swal.fire({
+                    title: "¿Desea eliminar el usuario?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.delete(`http://127.0.0.1:8000/api/user/${id}`, {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                            .then(response => {
+                                Swal.fire({
+                                    title: "Usuario eliminado!",
+                                    icon: "success"
+                                });
+                                setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
+                            })
+                            .catch(error => {
+                                console.error('Error al hacer la solicitud:', error);
+                            });
+
+                    }
+                });
+            
+           
+    }
+
     return (
         <div className='relative'>
             <div className={`${showAdd ? 'block' : 'hidden'} fixed top-0 bottom-0 left-0 right-0 w-screen h-screen form z-40 flex items-center justify-center`}>
@@ -229,7 +267,7 @@ export const Users = () => {
                                             </td>
                                             <td class="whitespace-nowrap px-6 py-4">
                                                 <Link to={`/editar-usuario/${element.id}`}><FontAwesomeIcon className='cursor-pointer duration-500 mr-5 text-2xl text-blue-500 hover:text-blue-950' icon={faEdit} /></Link>
-                                                <FontAwesomeIcon className='cursor-pointer duration-500 text-2xl text-red-500 hover:text-red-950' icon={faTrash} />
+                                                <button onClick={ () => handleDelete(element.id)}><FontAwesomeIcon className='cursor-pointer duration-500 text-2xl text-red-500 hover:text-red-950' icon={faTrash} /></button>
                                             </td>
                                         </tr>
                                     ))}
