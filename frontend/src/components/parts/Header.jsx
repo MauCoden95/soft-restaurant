@@ -13,6 +13,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
+import '../../../public/styles/Styles.css';
 
 export const Header = () => {
     const [userData, setUserData] = useState({});
@@ -113,8 +114,8 @@ export const Header = () => {
                         <button onClick={showMenu} className='text-sm bg-gray-300 hover:bg-stone-400 duration-150 p-2.5'>
                             <FontAwesomeIcon icon={faUser} /> {userData.name} <FontAwesomeIcon className='ml-5' icon={faChevronDown} />
                         </button>
-                        <div className={`${menu ? 'block' : 'hidden'} absolute top-full right-0 w-full h-auto`}>
-                            <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faGear} /> Configuración</button>
+                        <div className={`${menu ? 'menu-show' : 'menu-hidden'}  absolute top-full right-0 w-full h-auto`}>
+                            <Link to={`/configuracion/${userData.id}`}><button className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faGear} /> Configuración</button></Link>
                             <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión</button>
                         </div>
                     </div>

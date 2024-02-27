@@ -116,4 +116,15 @@ class AuthController extends Controller
 
         return response()->json("Usuario eliminado");
     }
+
+    public function changePassword(Request $request ,$id){
+        $user = User::find($id);
+
+        $user->update([
+            'password' => $request->password
+        ]);    
+        
+
+        return response()->json("Contraseña cambiada");
+    }
 }

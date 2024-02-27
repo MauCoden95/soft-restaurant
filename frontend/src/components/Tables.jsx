@@ -87,9 +87,9 @@ export const Tables = () => {
                 <BtnAdd onClick={toggleAdd}/>
             </div>
             <h2 className='text-center my-5'>Estado de las mesas: <span className='text-blue-500'>Libre</span> | <span className='text-orange-500'>Ocupada</span></h2>
-            <div className='w-11/12 min-h-0 m-auto mt-12 mb-8 grid grid-cols-6 gap-4 justify-items-center'>
+            <div className='w-11/12 min-h-0 m-auto mt-12 mb-8 grid grid-cols-8 gap-4 justify-items-center'>
                 {tables.map((element) => (
-                    <Link to={`/mesa/${element.nro}`} class={`w-full h-36 border-4 border-blue-700 ${element.state ? 'bg-orange-500' : 'bg-blue-500'} flex items-center justify-center text-2xl`}>
+                    <Link to={`/mesa/${element.nro}`} class={`w-full h-36 border-4 border-blue-700 ${element.state ? 'bg-orange-500' : 'bg-blue-500'} flex items-center justify-center text-xl`}>
                         Mesa # {element.nro}
                     </Link>
                 ))}

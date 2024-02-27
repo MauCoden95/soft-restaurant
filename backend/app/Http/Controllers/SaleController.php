@@ -12,17 +12,12 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class SaleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('jwt.auth');
-    // }
-    
-    
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('jwt.auth');
     }
-
+    
+    
    
     public function store(SaleRequest $request)
     {
@@ -40,9 +35,9 @@ class SaleController extends Controller
 
 
 
-    public function getSalesLastWeek()
+    public function getSalesLastFiveDays()
     {   
-        $dateLastWeek = Carbon::now()->subWeek();
+        $dateLastWeek = Carbon::now()->subDays(5);
 
         
         $salesLastWeek = Sale::selectRaw('DATE(date) as date, SUM(total) as total_sales')
@@ -81,32 +76,16 @@ class SaleController extends Controller
     }
 
     
-    public function show(Sale $sale)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Sale $sale)
-    {
-        //
-    }
+    public function getSalesLastThreeMonths()
+    {   
+        $dateLastThreeMonths = Carbon::now()->subMonths(3);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Sale $sale)
-    {
-        //
-    }
+        $salesLastThreeMonths = Sale::selectRaw('DATE(date) as date, SUM(total) as total_sales')
+            ->where('date', '>=', $dateLastThreeMonths)
+            ->groupBy('date')
+            ->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Sale $sale)
-    {
-        //
+        return $salesLastThreeMonths;
     }
 }

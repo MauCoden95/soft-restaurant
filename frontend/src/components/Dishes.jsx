@@ -257,23 +257,23 @@ export const Dishes = () => {
                                     {dishes.map((element) => (
                                         <tr className="border-b dark:border-neutral-500">
                                             <td
-                                                className="text-xl bg-amber-400 whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
+                                                className="textbase bg-amber-400 whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500">
                                                 {element.id}
                                             </td>
                                             <td
-                                                className="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                className="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                                 {element.category_name}
                                             </td>
                                             <td
-                                                className="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                className="textbase whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                                 {element.name}
                                             </td>
                                             <td
-                                                className="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                className="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                                 {element.description}
                                             </td>
                                             <td
-                                                className="text-xl whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
+                                                className="text-base whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500">
                                                 {element.price}
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4">

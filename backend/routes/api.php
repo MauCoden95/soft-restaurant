@@ -16,6 +16,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/users-count', 'usersCount');
     Route::get('/user/{id}', 'dataUser');
     Route::put('/user/{id}', 'update');
+    Route::put('/user-psw/{id}', 'changePassword');
     Route::delete('/user/{id}', 'destroy');
 });
 
@@ -47,7 +48,7 @@ Route::controller(CategoryController::class)->group(function () {
 Route::controller(SaleController::class)->group(function () {
     Route::post('/sale', 'store');
     Route::get('/sales-today', 'todaySales');
-    Route::get('/sales-week', 'getSalesLastWeek');
+    Route::get('/sales-week', 'getSalesLastFiveDays');
     Route::get('/sales-four-weeks', 'getSalesLastFourWeeks');
 });
 

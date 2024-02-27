@@ -14,8 +14,8 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-      email: '',
-      password: ''
+    email: '',
+    password: ''
   });
 
   const handleChange = (e) => {
@@ -30,38 +30,50 @@ export const Login = () => {
 
 
     if (formData.email == '' || formData.password == '') {
-        Swal.fire({
-          title: 'Error',
-          text: 'Error, campos vacíos',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-        });
+      Swal.fire({
+        title: 'Error',
+        text: 'Error, campos vacíos',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
     } else {
-        axios.post('http://127.0.0.1:8000/api/login', formData)
-            .then(response => {
-              console.log(response.data.status);
-                
-                if (response.data.status != 'error') {
-                    localStorage.setItem('userData', JSON.stringify(response.data.user));
-                    localStorage.setItem('token', response.data.token);
-                    navigate('/dashboard');
-                }else{
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'Error, credenciales incorrectas',
-                    icon: 'error',
-                    confirmButtonText: 'Aceptar',
-                  });
-                }
-            })
-            .catch(error => {
+      axios.post('http://127.0.0.1:8000/api/login', formData)
+        .then(response => {
+          console.log(response.data.status);
+
+          if (response.data.status != 'error') {
+            localStorage.setItem('userData', JSON.stringify(response.data.user));
+            localStorage.setItem('token', response.data.token);
+
+            setTimeout(() => {
               Swal.fire({
-                title: 'Error',
-                text: 'Error, credenciales incorrectas',
-                icon: 'error',
-                confirmButtonText: 'Aceptar',
+                title: "Datos correctos",
+                icon: "success",
+                html: `
+                <p>Bienvenido al sistema</p>
+              `,
               });
+              navigate('/dashboard');
+            }, 500);
+            //navigate('/dashboard');
+
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: 'Error, credenciales incorrectas',
+              icon: 'error',
+              confirmButtonText: 'Aceptar',
             });
+          }
+        })
+        .catch(error => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Error, credenciales incorrectas',
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        });
 
     }
 
@@ -72,7 +84,7 @@ export const Login = () => {
 
 
 
-};
+  };
 
   return (
     <div className="login w-screen h-screen flex items-center justify-center">
@@ -94,24 +106,24 @@ export const Login = () => {
           <div>
             <label htmlFor="">Correo</label>
 
-            <input className='m-auto mt-0.5 w-full px-3 py-2 bg-gray-100 rounded-md border-2 border-gray-300 active:border-gray-700' type="text" name="email" value={formData.email} onChange={handleChange}/>
+            <input className='m-auto mt-0.5 w-full px-3 py-2 bg-gray-100 rounded-md border-2 border-gray-300 active:border-gray-700' type="text" name="email" value={formData.email} onChange={handleChange} />
 
-         
+
           </div>
 
           <div className="mt-4">
-          <label htmlFor="">Contraseña</label>
+            <label htmlFor="">Contraseña</label>
 
-          <input className='m-auto mt-0.5 w-full px-3 py-2 bg-gray-100 rounded-md border-2 border-gray-300 active:border-gray-700' type="password" name="password"  value={formData.password} onChange={handleChange}/>
+            <input className='m-auto mt-0.5 w-full px-3 py-2 bg-gray-100 rounded-md border-2 border-gray-300 active:border-gray-700' type="password" name="password" value={formData.password} onChange={handleChange} />
 
-               
+
           </div>
 
 
           <div className="flex items-center justify-end mt-4">
 
 
-            <BtnSend value={value}/>
+            <BtnSend value={value} />
           </div>
 
 

@@ -13,6 +13,7 @@ import { EditCategories } from './components/EditCategories'
 import { Tables } from './components/Tables'
 import { Orders } from './components/Orders'
 import { EditUsers } from './components/EditUsers'
+import { Settings } from './components/Settings'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,6 +31,7 @@ function App() {
           <Route path='/editar-insumo/:id' element={<EditDishes/>}></Route>
           <Route path='/mesas' element={<Tables/>}></Route>
           <Route path='/mesa/:id' element={<Orders/>}></Route>
+          <Route path='/configuracion/:id' element={<Settings/>}></Route>
       </Routes>
     </>
   )
