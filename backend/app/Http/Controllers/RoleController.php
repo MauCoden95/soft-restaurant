@@ -13,6 +13,41 @@ class RoleController extends Controller
       {   $this->middleware('jwt.auth');
     }
 
+
+
+    /**
+ * Listar todos los roles
+ *
+ * @OA\Get(
+ *     path="/api/roles",
+ *     tags={"Roles"},
+ *     summary="Listar todos los roles",
+ *     description="Recupera una lista de todos los roles disponibles.",
+ *     @OA\Response(
+ *         response=200,
+ *         description="OK",
+ *         @OA\JsonContent(
+ *             @OA\Property(
+ *                 property="roles",
+ *                 type="array",
+ *                 @OA\Items(
+ *                     type="object",
+ *                     @OA\Property(
+ *                         property="id",
+ *                         type="integer",
+ *                         example="1"
+ *                     ),
+ *                     @OA\Property(
+ *                         property="name",
+ *                         type="string",
+ *                         example="Admin"
+ *                     )
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
     public function index()
     {
         $roles = Role::all();
@@ -22,51 +57,5 @@ class RoleController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Role $role)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Role $role)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
-    {
-        //
-    }
+   
 }

@@ -1,0 +1,1125 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Sistema de Restaurantes",
+        "description": "Listado de endpoints de la api",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/"
+        }
+    ],
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Crear un usuario nuevo",
+                "description": "Crear un nuevo usuario en la base de datos.",
+                "operationId": "8e4e3cb7b46126f4696379d3c7eeb4ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mauro Miguel"
+                                    },
+                                    "role_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "mauro@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "1111111"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "success"
+                                                    },
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "Usuario registrado con exito!!!"
+                                                    },
+                                                    "user": {
+                                                        "type": "json",
+                                                        "example": "{\"name\": \"Mauro Miguel\", \"role_id\": 1, \"email\": \"mauro@email.com\", \"password\": \"11111111\"}"
+                                                    },
+                                                    "token": {
+                                                        "type": "string",
+                                                        "example": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwOTM0ODc1MywiaWF0IjoxNzA5MzQ4NzUzfQ.gRkdp6ZyRt60q5eQHgZXBUpC41Byy_ZnHsBUJ4dEKAw"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Iniciar sesión",
+                "description": "Inicio de sesión con usuario y contraseña.",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "description": "Credenciales de inicio de sesión",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "mauro@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "11111111"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "success"
+                                                    },
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "Login exitoso!!!"
+                                                    },
+                                                    "user": {
+                                                        "type": "json",
+                                                        "example": "{\"name\": \"Mauro Miguel\", \"role_id\": 1, \"email\": \"mauro@email.com\", \"password\": \"11111111\"}"
+                                                    },
+                                                    "token": {
+                                                        "type": "string",
+                                                        "example": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwOTM0ODc1MywiaWF0IjoxNzA5MzQ4NzUzfQ.gRkdp6ZyRt60q5eQHgZXBUpC41Byy_ZnHsBUJ4dEKAw"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Listar todos los usuarios",
+                "description": "Recupera una lista de todos los usuarios.",
+                "operationId": "ed9d7b4286f72fec2e1b65dcdb91f000",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "role_id": {
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Mauro Miguel"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "mauro@email.com"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users-count": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Contar la cantidad de usuarios",
+                "description": "Devuelve la cantidad de usuarios.",
+                "operationId": "ae64d655feeae3f873e847be9319316c",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "usersCount": {
+                                                        "type": "number",
+                                                        "example": "5"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Obtener el id de un usuario por su ID",
+                "description": "Obtener id de un usuario",
+                "operationId": "7e6eddc96aade9354b5238833ec7d950",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "success"
+                                                    },
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "Login exitoso!!!"
+                                                    },
+                                                    "user": {
+                                                        "type": "json",
+                                                        "example": "{\"name\": \"Mauro Miguel\", \"role_id\": 1, \"email\": \"mauro@email.com\", \"password\": \"11111111\"}"
+                                                    },
+                                                    "token": {
+                                                        "type": "string",
+                                                        "example": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwOTM0ODc1MywiaWF0IjoxNzA5MzQ4NzUzfQ.gRkdp6ZyRt60q5eQHgZXBUpC41Byy_ZnHsBUJ4dEKAw"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Editar usuario de un ID determinado",
+                "description": "Actualizar datos usuario",
+                "operationId": "703c6108dbc48db4d5682ed469585e04",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "role_id": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mauro Miguel"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "mauro@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "1111111"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario editado"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Eliminar usuario con un ID determinado",
+                "description": "Eliminar usuario",
+                "operationId": "cbb8757166400b4ff5f1ea2980fc6337",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario eliminado"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/user-pwd/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Editar contraseña de un usuario con ID determinado",
+                "description": "Cambiar contraseña",
+                "operationId": "9622219e2203ecea452233beda38fdc9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "example": "1111111"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contruseña cambiada"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/dishes": {
+            "get": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Listar todos los platos",
+                "description": "Recupera una lista de todos los platos disponibles.",
+                "operationId": "ddf841d9ba35d917bd22a504c13b2f72",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "dishes": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "category_name": {
+                                                        "type": "string",
+                                                        "example": "Categoria"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Plato"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Descripción del plato"
+                                                    },
+                                                    "price": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "10.50"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Crear un nuevo plato",
+                "description": "Crea un nuevo plato en el sistema.",
+                "operationId": "3fc0252a7de74dac3747d26739c844cb",
+                "requestBody": {
+                    "description": "Datos del nuevo plato",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nombre del nuevo plato"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descripción del nuevo plato"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "12.99"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Insumo guardado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dishes-count": {
+            "get": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Obtener la cantidad de platos",
+                "description": "Recupera la cantidad total de platos disponibles en el sistema.",
+                "operationId": "383d7ac321fc890126a877d77e5664f2",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "dishesCount": {
+                                            "type": "integer",
+                                            "example": "10"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/dish/{id}": {
+            "get": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Obtener un plato por su ID",
+                "description": "Recupera la información de un plato específico por su ID.",
+                "operationId": "6e9b0c155f8f8739d4bf6abe56f02e23",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del plato a recuperar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "dish": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Actualizar un plato existente",
+                "description": "Actualiza la información de un plato existente en el sistema.",
+                "operationId": "429651375416801d92426feb5838bd41",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del plato a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Datos del plato a actualizar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nuevo nombre del plato"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Nueva descripción del plato"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "15.99"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Insumo editado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Platos"
+                ],
+                "summary": "Eliminar un plato existente",
+                "description": "Elimina un plato existente del sistema.",
+                "operationId": "21511d45f72d655fc0fe476e88160584",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del plato a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Producto eliminado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Listar todos los roles",
+                "description": "Recupera una lista de todos los roles disponibles.",
+                "operationId": "77e3636d8592997ce9d6d27b50857a69",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Admin"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sale": {
+            "post": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Crear una nueva venta",
+                "description": "Crea una nueva venta en el sistema.",
+                "operationId": "a4679729ade7c8239f4311330b84da7f",
+                "requestBody": {
+                    "description": "Datos de la nueva venta",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "total": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "100.50"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-04"
+                                    },
+                                    "hour": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "12:30:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Venta guardada!!!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sales-week": {
+            "get": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Obtener las ventas de los últimos cinco días",
+                "description": "Recupera las ventas totales realizadas en los últimos cinco días.",
+                "operationId": "deb0a9bc4233a3c2a2538c58420e285d",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "salesLastWeek": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-03-01"
+                                                    },
+                                                    "total_sales": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "500.25"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sales-four-weeks": {
+            "get": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Obtener las ventas de las últimas cuatro semanas",
+                "description": "Recupera las ventas totales realizadas en las últimas cuatro semanas.",
+                "operationId": "876b5cb8de99762cf94a0c0799032815",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "salesFourLastWeeks": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "year": {
+                                                        "type": "integer",
+                                                        "example": "2024"
+                                                    },
+                                                    "week": {
+                                                        "type": "integer",
+                                                        "example": "9"
+                                                    },
+                                                    "total_sales": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "1500.75"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sales-today": {
+            "get": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Obtener las ventas de hoy",
+                "description": "Recupera todas las ventas realizadas en el día de hoy.",
+                "operationId": "56b479c4faefb52134eda9c8f92c30f6",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "salesToday": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sales-twelve-weeks": {
+            "get": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Obtener las ventas de los últimos doce meses",
+                "description": "Recupera las ventas totales realizadas en los últimos doce meses.",
+                "operationId": "f68eacfb579da1e07a6372157dad6bc8",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "salesLastTwelveMonths": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "year": {
+                                                        "type": "integer",
+                                                        "example": "2023"
+                                                    },
+                                                    "month": {
+                                                        "type": "integer",
+                                                        "example": "3"
+                                                    },
+                                                    "total_sales": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": "7500.99"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/tables": {
+            "get": {
+                "tags": [
+                    "Mesas"
+                ],
+                "summary": "Listar todas las mesas",
+                "description": "Recupera una lista de todas las mesas disponibles.",
+                "operationId": "218d07c9683fe7c4b9ca0c7d171c6d44",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "nro": {
+                                                        "type": "integer",
+                                                        "example": "2"
+                                                    },
+                                                    "state": {
+                                                        "type": "boolean",
+                                                        "example": false
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/table": {
+            "post": {
+                "tags": [
+                    "Mesas"
+                ],
+                "summary": "Crear una tabla nueva",
+                "description": "Agrega una nueva mesa.",
+                "operationId": "6ad44abbe32bb50b49e661ecd57f732f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nro": {
+                                        "type": "integer",
+                                        "example": 15
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "Mesa guardada"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/change/{id}": {
+            "put": {
+                "tags": [
+                    "Mesas"
+                ],
+                "summary": "Cambiar disponibilidad de una mesa por su id",
+                "description": "Cambia el estado de la mesa de false a true o viceversa.",
+                "operationId": "0fea71565e4b2ee1b52f363d4ab167ed",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 15
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "message": {
+                                                        "type": "string",
+                                                        "example": "Estado cambiado correctamente"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
