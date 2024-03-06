@@ -51,6 +51,7 @@ Route::controller(SaleController::class)->group(function () {
     Route::get('/sales-week', 'getSalesLastFiveDays');
     Route::get('/sales-four-weeks', 'getSalesLastFourWeeks');
     Route::get('/sales-twelve-weeks', 'getSalesLastTwelveMonths');
+    Route::get('/sales-for-days', 'salesForDays');
 });
 
 Route::controller(RoleController::class)->group(function () {

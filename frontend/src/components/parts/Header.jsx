@@ -114,7 +114,7 @@ export const Header = () => {
                         <button onClick={showMenu} className='text-sm bg-gray-300 hover:bg-stone-400 duration-150 p-2.5'>
                             <FontAwesomeIcon icon={faUser} /> {userData.name} <FontAwesomeIcon className='ml-5' icon={faChevronDown} />
                         </button>
-                        <div className={`${menu ? 'menu-show' : 'menu-hidden'}  absolute top-full right-0 w-full h-auto`}>
+                        <div className={`${menu ? 'menu-show' : 'menu-hidden'}  absolute top-full right-0 w-full h-auto border-t border-gray-800`}>
                             <Link to={`/configuracion/${userData.id}`}><button className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faGear} /> Configuración</button></Link>
                             <button onClick={logout} className='w-full h-12 text-base duration-200 bg-gray-300 hover:bg-amber-600'><FontAwesomeIcon icon={faSignOutAlt} /> Cerrar sesión</button>
                         </div>

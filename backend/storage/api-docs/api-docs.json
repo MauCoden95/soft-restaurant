@@ -973,6 +973,47 @@
                 }
             }
         },
+        "/api/sales-for-days": {
+            "get": {
+                "tags": [
+                    "Ventas"
+                ],
+                "summary": "Obtener las ventas por día de los últimos 7 días",
+                "description": "Obtener la cantidad de ventas por día en los últimos 7 días",
+                "operationId": "7ea2fd0f435bb5d18854c1030eff46d5",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "salesLastTwelveMonths": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2024-02-29"
+                                                    },
+                                                    "quantity_sales": {
+                                                        "type": "number",
+                                                        "example": "3"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/tables": {
             "get": {
                 "tags": [

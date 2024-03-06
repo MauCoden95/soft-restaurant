@@ -8,14 +8,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SaleRequest;
 use Carbon\Carbon;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\DB;
 
 
 class SaleController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('jwt.auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('jwt.auth');
+    // }
     
     
    /**
@@ -288,4 +289,56 @@ class SaleController extends Controller
     
         return $salesLastTwelveMonths;
     }
+
+
+
+
+
+
+    /**
+ * Obtener la cantidad de ventas por día en los últimos 7 días
+ *
+ * @OA\Get(
+ *     path="/api/sales-for-days",
+ *     tags={"Ventas"},
+ *     summary="Obtener las ventas por día de los últimos 7 días",
+ *     @OA\Response(
+ *         response=200,
+ *         description="OK",
+ *         @OA\JsonContent(
+ *             @OA\Property(
+ *                 property="salesLastTwelveMonths",
+ *                 type="array",
+ *                 @OA\Items(
+ *                     type="object",
+ *                     @OA\Property(
+ *                         property="date",
+ *                         type="date",
+ *                         example="2024-02-29"
+ *                     ),
+ *                     @OA\Property(
+ *                         property="quantity_sales",
+ *                         type="number",
+ *                         example="3"
+ *                     )
+ *                 )
+ *             )
+ *         )
+ *     )
+ * )
+ */
+    public function salesForDays()
+    {
+        $salesForDay = Sale::select(
+                DB::raw('DATE(date) as date'),
+                DB::raw('COUNT(*) as quantity_sales')
+            )
+            ->where('date', '>=', now()->subDays(7))
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return $salesForDay;
+    }
+
 }

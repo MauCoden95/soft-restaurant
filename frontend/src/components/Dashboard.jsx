@@ -33,6 +33,7 @@ export const Dashboard = () => {
   const [totalSales, setTotalSales] = useState(0);
   const [salesWeek, setSalesWeek] = useState([]);
   const [salesMonth, setSalesMonth] = useState([]);
+  const [salesForDay, setSalesForDay] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -143,10 +144,26 @@ export const Dashboard = () => {
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error.response.data);
       });
+
+
+
+      axios
+      .get("http://127.0.0.1:8000/api/sales-for-days", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setSalesForDay(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al hacer la solicitud:", error.response.data);
+      });
   }, []);
 
 
-  
+ 
 
 
 
@@ -157,7 +174,7 @@ export const Dashboard = () => {
   const dates = salesWeek.map((item) => item.date);
   const sales = salesWeek.map((item) => parseInt(item.total_sales));
 
-  console.log("dsaii",dates)
+
 
   const data = {
     labels: dates,
@@ -214,6 +231,38 @@ export const Dashboard = () => {
 
 
 
+
+  //Datos Tercer grafico
+  const salesDay = salesForDay.map((item) => item.date);
+  const quantity_sales = salesForDay.map((item) => parseInt(item.quantity_sales));
+
+  
+
+
+  const dataSalesDay = {
+    labels: salesDay,
+    datasets: [
+      {
+        labels: "Ventas del mes",
+        data: quantity_sales,
+        backgroundColor: "#654321",
+        borderColor: "#b5651d",
+        pointBorderColor: "#654321",
+        pointBorderWidth: 5,
+        tension: 0.2,
+      },
+    ],
+  };
+
+  const optionsSalesDay = {
+    plugins: {
+      legend: true,
+    },
+  };
+
+
+
+
   return (
     <div>
       <Header />
@@ -265,7 +314,7 @@ export const Dashboard = () => {
         </div>
         <div className="w-4/12">
           <h2 className="text-center text-amber-800 text-xl">Ventas por día</h2>
-          <Line data={data} options={options}></Line>
+          <Line data={dataSalesDay} options={optionsSalesDay}></Line>
         </div>
       </div>
     </div>
