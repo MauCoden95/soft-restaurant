@@ -24,6 +24,8 @@ import "../../public/styles/Styles.css";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
+
+
 export const Dashboard = () => {
   const [userData, setUserData] = useState({});
   const [dishes, setDishes] = useState(0);
@@ -110,9 +112,6 @@ export const Dashboard = () => {
         console.error("Error al hacer la solicitud:", error.response.data);
       });
 
-
-
-
     axios
       .get("http://127.0.0.1:8000/api/sales-week", {
         headers: {
@@ -127,8 +126,6 @@ export const Dashboard = () => {
       .catch((error) => {
         console.error("Error al hacer la solicitud:", error.response.data);
       });
-
-
 
     axios
       .get("http://127.0.0.1:8000/api/sales-four-weeks", {
@@ -145,9 +142,7 @@ export const Dashboard = () => {
         console.error("Error al hacer la solicitud:", error.response.data);
       });
 
-
-
-      axios
+    axios
       .get("http://127.0.0.1:8000/api/sales-for-days", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -162,19 +157,11 @@ export const Dashboard = () => {
       });
   }, []);
 
-
- 
-
-
-
-
   //GRAFICOS
 
   //Datos primer grafico
   const dates = salesWeek.map((item) => item.date);
   const sales = salesWeek.map((item) => parseInt(item.total_sales));
-
-
 
   const data = {
     labels: dates,
@@ -197,14 +184,9 @@ export const Dashboard = () => {
     },
   };
 
-
-
   //Datos segundo grafico
   const datesMonth = salesMonth.map((item) => item.week);
   const monthSales = salesMonth.map((item) => parseInt(item.total_sales));
-
-  
-
 
   const dataMonth = {
     labels: datesMonth,
@@ -227,17 +209,11 @@ export const Dashboard = () => {
     },
   };
 
-
-
-
-
-
   //Datos Tercer grafico
   const salesDay = salesForDay.map((item) => item.date);
-  const quantity_sales = salesForDay.map((item) => parseInt(item.quantity_sales));
-
-  
-
+  const quantity_sales = salesForDay.map((item) =>
+    parseInt(item.quantity_sales)
+  );
 
   const dataSalesDay = {
     labels: salesDay,
@@ -259,9 +235,6 @@ export const Dashboard = () => {
       legend: true,
     },
   };
-
-
-
 
   return (
     <div>
